@@ -1,0 +1,5 @@
+export const INIT_AUTH_START = "INIT_AUTH_START";
+export const INIT_AUTH_FINISHED = "INIT_AUTH_FINISHED";
+export const INIT_AUTH_ERROR = "INIT_AUTH_ERROR";
+
+export const LOGIN_USER = "LOGIN_USER";

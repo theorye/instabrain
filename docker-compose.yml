@@ -1,0 +1,51 @@
+version: "3"
+# CMD docker-compose build
+# docker-compose run api
+# docker-compose down
+# docker-compose up --build -d
+# docker-compose --verbose up
+# docker-compose exec [service] bash
+# docker-compose exec redis bash
+# redis-cli
+
+services:
+  # Redis
+  redis:
+    container_name: redis
+    image: redis
+    ports:
+      - "6379:6379"
+  
+  # Backend
+  api:
+    # env_file:
+    #   - ./.private/api-keys.env "Another way to insert env variables"
+    container_name: backend
+    build: ./api
+    # image: node:8.11.1
+    volumes: # Allows volume connection between container and device
+      - ./api:/usr/src/api
+    command: npm start -- -L # https://github.com/remy/nodemon/issues/1447
+    working_dir: /usr/src/api
+    ports:
+      - "5000:5000"
+    environment: # Environment variables to pass
+      MYSQL_URI: mysql://root:password@mysql:3306/
+      # POSTGRES_URI: postgres://user:password@postgres:5432/smart-brain
+      # REDIS_URI: redis://redis:6379
+      # POSTGRES_USER: user
+      # POSTGRES_PASSWORD: password
+      # POSTGRES_DB: smart-brain
+      # POSTGRES_HOST: postgres
+    # Heads up! Docker has updated this feature and now you don't need to define the links property in order for things to work - https://docs.docker.com/compose/networking/
+    # links:
+    #  - postgres
+    #   - redis
+
+  mysql:
+    image: mysql:5.7.27
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      # MYSQL_DATABASE: coolapp
+    ports:
+      - "3306:3306"

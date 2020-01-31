@@ -1,0 +1,6 @@
+@font-face {
+    font-family: "Billabong";
+    font-style: normal;
+    font-weight: normal;
+    src: local("Billabong"), url("./assets/Billabong.woff") format("woff");
+}

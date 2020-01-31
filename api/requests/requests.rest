@@ -1,0 +1,4 @@
+GET http://localhost:5000/api/users?limit=10
+###
+
+GET http://localhost:5000/api/post?id=cd51c2b9-40c6-11ea-be5b-0242ac140004

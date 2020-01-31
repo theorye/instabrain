@@ -1,0 +1,42 @@
+
+POST http://localhost:5000/api/accounts/register
+Content-Type: application/json
+
+{
+    "username": "Tester",
+    "password": "password",
+    "email": "dog@dog.com",
+    "fullname": "James White"
+}
+
+###
+
+POST http://localhost:5000/api/login
+Content-Type: application/json
+
+{
+    "username": "Tester",
+    "password": "pass"
+}
+
+###
+
+GET http://localhost:5000/posts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVGVzdGVyIiwiaWF0IjoxNTc5Mzc5ODQ0LCJleHAiOjE1NzkzNzk4NzR9.7RcSPkme89R9SYofXdqsv4pf-jqJa5x1x5HuQFsns5g
+###
+
+POST http://localhost:5000/api/token
+Content-Type: application/json
+
+{
+    "token" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRlc3RlciIsImlkIjoiZjBjOGI2N2QtM2M5Ny0xMWVhLTkyMGQtMDI0MmFjMTQwMDAzIiwiaWF0IjoxNTc5NjQzMzg2fQ.E_c7IxV1WYSRL_xCoBk3pIcO8k7qrCkCMLYEbf28EgE"
+}
+
+###
+
+DELETE http://localhost:5000/logout
+Content-Type: application/json
+
+{
+    "token" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRlc3RlciIsImlkIjoiMjlmNzg1ZGMtM2M5OC0xMWVhLTkyMGQtMDI0MmFjMTQwMDAzIiwiaWF0IjoxNTc5NjQzNDgyfQ.g5WZKz-NWCSUapb70FumzSyRP5z4HPHqLRjAFw_xzhA"
+}
