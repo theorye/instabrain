@@ -1,6 +1,6 @@
 import * as yup from "yup";
 
-export default function createAuthSchema(useLogin) {
+export function createAuthSchema(useLogin) {
   const schema = yup.object();
   const requirements = {
     username: yup.string().required(),

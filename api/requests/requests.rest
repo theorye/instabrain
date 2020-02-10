@@ -1,4 +1,9 @@
-GET http://localhost:5000/api/users?limit=10
+GET http://localhost:5000/api/feed
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImEiLCJpZCI6Ijk2ZmRmMmNhLTQ3ZDEtMTFlYS1hNjE1LTAyNDJhYzEyMDAwMyIsImlhdCI6MTU4MDg3NzY0OCwiZXhwIjoxNTgwODc3NjY4fQ.-F7LYea5IEAxIQbnOSZPGhAvwaPO4WyduT2_UoandyE
+
 ###
+
+
+
 
 GET http://localhost:5000/api/post?id=cd51c2b9-40c6-11ea-be5b-0242ac140004

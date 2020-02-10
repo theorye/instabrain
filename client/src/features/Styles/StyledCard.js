@@ -6,6 +6,7 @@ const StyledCard = styled.article`
   border-radius: 4px;
   display: block;
   max-width: ${props => props.maxWidth || "40rem"};
+  margin-bottom: 3rem;
 `;
 
 export default StyledCard;

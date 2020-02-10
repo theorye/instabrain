@@ -8,10 +8,11 @@ const createUser = require("./controllers/createUser");
 const getUser = require("./controllers/getUser");
 const refreshToken = require("./controllers/refreshToken");
 const getProfile = require("./controllers/getProfile");
-const getUsers = require('./controllers/getUsers');
-const followUser = require('./controllers/followUser');
-const getPosts = require('./controllers/getPosts');
-const getPost = require('./controllers/getPost');
+const getUsers = require("./controllers/getUsers");
+const followUser = require("./controllers/followUser");
+const getPosts = require("./controllers/getPosts");
+const getPost = require("./controllers/getPost");
+const getFeed = require("./controllers/getFeed");
 
 // App Middleware
 const loggerMiddleware = require("./middleware/logger");
@@ -46,5 +47,7 @@ app.get("/api/user", authenticateToken, getUser);
 app.get("/api/users", getUsers);
 app.get("/api/profiles", getProfile);
 app.get("/api/post", getPost);
+
+app.get("/api/feed", authenticateToken, getFeed);
 
 module.exports = app;
