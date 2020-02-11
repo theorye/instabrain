@@ -3,16 +3,15 @@ import { useParams } from "react-router-dom";
 import useApi from "../hooks/useApi";
 import Api from "../services/agent";
 
-const ImageViewContainer = props => {
+const ImageViewContainer = () => {
   console.log("Image View Container rendered...");
   let { id } = useParams();
   const [{ status, response }, types, handleRequest] = useApi(Api.getPost);
 
   useEffect(() => {
-    handleRequest(id).then(console.log);
+    handleRequest(id);
   }, [handleRequest, id]);
 
-  console.log(props);
   return (
     <div>
       {status === types.SUCCESS && (

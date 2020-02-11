@@ -15,13 +15,11 @@ function ProfileContainer({ handle }) {
   console.log("Profile Container Rendered");
   const [{ status, response }, types, handleRequest] = useApi(Api.getProfile);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [appState, appDispatch, appActions] = useAppState();
+  const [appState] = useAppState();
 
   useEffect(() => {
-    handleRequest(handle).then(data => {
-      // console.log("PROFILE CONTAINER HANDLE REQUEST");
-      // console.log(data);
-    });
+    handleRequest(handle)
+    
   }, [handleRequest, handle]);
 
   if (status === types.FETCHING) {
@@ -48,10 +46,12 @@ function ProfileContainer({ handle }) {
         </button>
       );
     } else {
-      console.log('proile response')
-      console.log(response)
-  
-      button = <FollowButtonContainer userId={response.id} following={response.following} />;
+      button = (
+        <FollowButtonContainer
+          userId={response.id}
+          following={response.following}
+        />
+      );
       button2 = <button>another butto2n</button>;
     }
     return (

@@ -7,11 +7,10 @@ import useFeedState from "../hooks/useFeedState";
 
 import StyledUserImg from "../features/styles/StyledUserImg";
 import StyledCard from "../features/styles/StyledCard";
-import SuggestionsList from "../features/suggestions/SuggestionsList";
-import FollowButtonContainer from "./FollowButtonContainer";
+import FollowButtonContainer from "./FollowButtonContainer2";
 import styled from "styled-components";
+
 const Cards = ({ posts }) => {
-  console.log(posts);
   return posts.map(post => <Card key={post.id} {...post} />);
 };
 
@@ -30,14 +29,13 @@ const StyledSuggestionUser = styled.div`
 
 const FeedContainer = () => {
   console.log("Feed container rendered");
-  const [state, appDispatch, appActions] = useAppState();
+  const [state] = useAppState();
   const [hasSelectedFollowers, setSelectedFollowers] = useState(false);
   const [feedState, feedDispatch, feedActions] = useFeedState();
   const posts = feedState.posts;
   const isLoading = feedState.loading;
 
   const handleSelectedFollowers = useCallback(() => {
-    console.log("firedHasSelectedFollowers");
     // feedDispatch(feedActions.setFeedNewFollowing);
     setSelectedFollowers(true);
   }, [setSelectedFollowers]);
@@ -45,12 +43,11 @@ const FeedContainer = () => {
   useEffect(() => {
     if (isLoading === true) {
       Api.getFeed().then(res => {
-        console.log("I am firing");
         feedDispatch(feedActions.setFeedState(res));
       });
     }
   }, [feedActions, posts.length, feedDispatch, isLoading]);
-  console.log(feedState);
+
   if (feedState.loading === false && feedState.posts.length > 0) {
     return (
       <div style={{ display: "flex" }}>
@@ -128,12 +125,6 @@ const FeedContainer = () => {
               />
             </StyledSuggestion>
           ))}
-
-          {/* <SuggestionsList
-            dispatch={feed}
-            suggestions={feedState.suggestions}
-            FollowButton={FollowButtonContainer}
-          /> */}
 
           {hasSelectedFollowers && (
             <button onClick={() => feedDispatch(feedActions.setFeedLoading())}>

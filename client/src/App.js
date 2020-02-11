@@ -9,7 +9,6 @@ import FeedProvider from "./providers/FeedProvider";
 
 function AppContainer({ state }) {
   console.log("App container rendered ...");
-  console.log(state);
   return (
     <BrowserRouter>
       <AppContext.Provider

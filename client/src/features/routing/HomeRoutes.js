@@ -8,10 +8,9 @@ import ProfileContainer from "../../containers/ProfileContainer";
 import StyledPage from "../styles/StyledPage";
 
 const HomeRoutes = () => {
-  console.log("Home Routes...");
+  console.log("HomeRoutes rendering...");
   const { handle } = useParams();
   const [state] = useAppState();
-  console.log(state);
 
   if (handle) {
     return (
