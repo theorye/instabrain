@@ -30,6 +30,7 @@ function ProfileContainer({ handle }) {
   let button2;
 
   if (status === types.SUCCESS && response.username) {
+    console.log(response);
     if (appState.username === handle) {
       button = <button className="btn profile-edit-btn">Edit Profile</button>;
       button2 = (
@@ -60,7 +61,7 @@ function ProfileContainer({ handle }) {
           <div className="profile-image">
             <img src={response.avatar || "/assets/defaultUser.jpg"} alt="" />
           </div>
-          <ProfileHeaderInfo username={response.username}>
+          <ProfileHeaderInfo introduction={response.introduction} username={response.username} name={response.name}>
             {button}
             {button2}
             {isModalOpen && <SettingsModal setIsModalOpen={setIsModalOpen} />}

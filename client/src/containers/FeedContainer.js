@@ -9,6 +9,7 @@ import StyledUserImg from "../features/styles/StyledUserImg";
 import StyledCard from "../features/styles/StyledCard";
 import FollowButtonContainer from "./FollowButtonContainer2";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const Cards = ({ posts }) => {
   return posts.map(post => <Card key={post.id} {...post} />);
@@ -97,18 +98,20 @@ const FeedContainer = () => {
             <h4>Suggestions for you</h4>
             {feedState.suggestions.slice(0, 4).map(user => (
               <StyledFeedSuggestion key={user.id}>
-                <StyledSuggestionUser>
-                  <StyledUserImg
-                    height="44px"
-                    width="44px"
-                    src={user.avatar}
-                    alt=""
-                  />
-                  <div>
-                    <h3>{user.username}</h3>
-                  </div>
-                 
-                </StyledSuggestionUser>
+                <Link to={`/${user.username}`}>
+                  <StyledSuggestionUser>
+                    <StyledUserImg
+                      height="44px"
+                      width="44px"
+                      src={user.avatar}
+                      alt=""
+                    />
+                    <div>
+                      <h3>{user.username}</h3>
+                    </div>
+                  </StyledSuggestionUser>
+                </Link>
+
                 <FollowButtonContainer
                   userId={user.id}
                   callback={handleSelectedFollowers}
@@ -131,16 +134,18 @@ const FeedContainer = () => {
           {feedState.suggestions.map(user => (
             <StyledSuggestion key={user.id}>
               <StyledSuggestionUser>
-                <StyledUserImg
-                  height="44px"
-                  width="44px"
-                  src={user.avatar}
-                  alt=""
-                />
-                <div>
-                  <h3>{user.username}</h3>
-                  <span>{user.name}</span>
-                </div>
+                <Link to={`/${user.username}`}>
+                  <StyledUserImg
+                    height="44px"
+                    width="44px"
+                    src={user.avatar}
+                    alt={user.username}
+                  />
+                  <div>
+                    <h3>{user.username}</h3>
+                    <span>{user.name}</span>
+                  </div>
+                </Link>
               </StyledSuggestionUser>
               <FollowButtonContainer
                 userId={user.id}

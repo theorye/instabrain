@@ -6,7 +6,7 @@ module.exports = async function getProfile(req, res) {
 
   const { user } = req;
 
-  console.log('this is user');
+  console.log("this is user");
   console.log(user);
   try {
     // const response = await query(getProfileQuery(req.query.username));
@@ -20,6 +20,8 @@ module.exports = async function getProfile(req, res) {
     const dto = {
       id: response[0][0][0].id,
       username: response[0][0][0].username,
+      name: response[0][0][0].name,
+      introduction: response[0][0][0].introduction,
       avatar: response[0][0][0].avatar,
       posts: response[0][1],
       following: response[0][2][0].following

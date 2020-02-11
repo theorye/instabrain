@@ -3,6 +3,8 @@ import StyledProfileInfo from "./StyledProfileInfo";
 
 export const ProfileHeaderInfo = ({
   username,
+  name,
+  introduction,
   children
 }) => {
   return (
@@ -26,9 +28,9 @@ export const ProfileHeaderInfo = ({
       </div>
 
       <div className="profile-bio">
-        <span className="profile-real-name">Jane Doe</span>
-        <span role="img" aria-label="message button">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit 📷✈️🏕️
+        <span className="profile-real-name">{name}</span>
+        <span style={{ width: 'auto'}}>
+          {introduction}
         </span>
       </div>
     </StyledProfileInfo>

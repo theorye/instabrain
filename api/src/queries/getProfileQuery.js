@@ -1,7 +1,8 @@
 module.exports = (username, userId=null) => `
-SELECT u.avatar, u.username, u.id
+SELECT u.avatar, u.username, u.id, u.name, u.introduction
 FROM instabrain.users u
-WHERE u.username = '${username}';    
+WHERE u.username = '${username}';  
+
 SELECT 
     p.url, 
     p.id, 
@@ -9,6 +10,7 @@ SELECT
 FROM instabrain.posts p
 INNER JOIN instabrain.users u ON p.user_id = u.id
 WHERE u.username = '${username}';
+
 SELECT 
     EXISTS(
         SELECT 1 

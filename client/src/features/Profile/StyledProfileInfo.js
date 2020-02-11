@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const StyledProfileInfo = styled.div`
     // background: purple;
-    flex: 1 0 calc(66%);
-    padding-left: 2rem;
+    // padding-left: 1rem;
+    margin-right: 1rem;
 
     .profile-user-settings {
         display: flex;
