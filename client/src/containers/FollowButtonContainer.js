@@ -6,15 +6,15 @@ import styled from "styled-components";
 
 const StyledButton = styled.button`
   height: 2rem;
-  background-color: ${({following}) => following ? 'white' : '#3897f0'};;
-  color: ${({following}) => following ? 'black' : 'white'};
+  background-color: ${({ following }) => (following ? "white" : "#3897f0")};
+  color: ${({ following }) => (following ? "black" : "white")};
   border: 1px solid transparent;
   border-radius: 4px;
   font-size: 0.93rem;
   padding: 0 0.6rem;
 `;
 
-const FollowButtonContainer = ({ userId }) => {
+const FollowButtonContainer = ({ userId, callback = () => {} }) => {
   const [{ status }, types, handleRequest] = useApi(Api.follow);
   let message;
 
@@ -28,7 +28,7 @@ const FollowButtonContainer = ({ userId }) => {
   return (
     <StyledButton
       following={status === types.SUCCESS}
-      onClick={() => handleRequest(userId)}
+      onClick={() => handleRequest(userId).then(callback)}
     >
       {message}
     </StyledButton>

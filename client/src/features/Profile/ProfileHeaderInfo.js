@@ -3,31 +3,13 @@ import StyledProfileInfo from "./StyledProfileInfo";
 
 export const ProfileHeaderInfo = ({
   username,
-  isModalOpen,
-  setIsModalOpen,
   children
 }) => {
   return (
     <StyledProfileInfo>
       <div className="profile-user-settings">
-        <h1 className="profile-user-name">{username}</h1>
-
-        <button className="btn profile-edit-btn">Edit Profile</button>
-        
-        {/* children is the settings modal */}
-        {isModalOpen && children}
-
-        <button
-          className="btn profile-settings-btn"
-          aria-label="profile settings"
-          onClick={() => {
-            setIsModalOpen(true);
-          }}
-        >
-          <span role="img" aria-label="settings">
-            &#9881;
-          </span>
-        </button>
+        <h1 className="profile-user-name">{username}</h1>        
+        {children}
       </div>
       <div className="profile-stats">
         <ul>

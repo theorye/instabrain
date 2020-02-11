@@ -3,6 +3,7 @@ SELECT
   l.hash, 
   l.id, 
   u.username,
+  u.name,
   (
     SELECT COUNT(*) 
     FROM instabrain.follows f 

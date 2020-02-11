@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import Api from "../services/agent";
 import Card from "../features/Card";
 
@@ -9,30 +9,47 @@ import StyledUserImg from "../features/styles/StyledUserImg";
 import StyledCard from "../features/styles/StyledCard";
 import SuggestionsList from "../features/suggestions/SuggestionsList";
 import FollowButtonContainer from "./FollowButtonContainer";
-
+import styled from "styled-components";
 const Cards = ({ posts }) => {
   console.log(posts);
   return posts.map(post => <Card key={post.id} {...post} />);
 };
 
+const StyledSuggestion = styled.div`
+  display: flex;
+  align-items: center;
+  width: 37.5rem;
+  justify-content: space-between;
+  padding: 0.5rem 0.5rem;
+`;
+
+const StyledSuggestionUser = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 const FeedContainer = () => {
   console.log("Feed container rendered");
-  const [update, forceUpdate] = useState();
-  const [state, ] = useAppState();
+  const [state, appDispatch, appActions] = useAppState();
+  const [hasSelectedFollowers, setSelectedFollowers] = useState(false);
   const [feedState, feedDispatch, feedActions] = useFeedState();
-  const isLoading = feedState.loading;
   const posts = feedState.posts;
+  const isLoading = feedState.loading;
+
+  const handleSelectedFollowers = useCallback(() => {
+    console.log("firedHasSelectedFollowers");
+    // feedDispatch(feedActions.setFeedNewFollowing);
+    setSelectedFollowers(true);
+  }, [setSelectedFollowers]);
 
   useEffect(() => {
-    if (posts.length === 0 && isLoading === true) {
-      console.log(feedState);
+    if (isLoading === true) {
       Api.getFeed().then(res => {
-        console.log('I am firing');
+        console.log("I am firing");
         feedDispatch(feedActions.setFeedState(res));
       });
     }
- 
-  }, [feedActions, feedDispatch, update]);
+  }, [feedActions, posts.length, feedDispatch, isLoading]);
   console.log(feedState);
   if (feedState.loading === false && feedState.posts.length > 0) {
     return (
@@ -67,13 +84,17 @@ const FeedContainer = () => {
               >
                 {state.username}
               </h4>
-              <span style={{ marginLeft: "1rem" }}>real name goes here</span>
+              <span style={{ marginLeft: "1rem" }}>{state.name}</span>
             </div>
           </div>
 
           <StyledCard>
             <h4>Suggestions for you</h4>
-            <SuggestionsList FollowButton={FollowButtonContainer} />
+            {/* <SuggestionsList
+              setFeedLoding={}
+              incrementFollowing={incrementFollowing}
+              FollowButton={FollowButtonContainer}
+            /> */}
           </StyledCard>
         </div>
       </div>
@@ -87,12 +108,38 @@ const FeedContainer = () => {
           Suggestions For you
         </h2>
         <StyledCard maxWidth={"40rem"}>
-          <SuggestionsList
+          {feedState.suggestions.map(user => (
+            <StyledSuggestion key={user.id}>
+              <StyledSuggestionUser>
+                <StyledUserImg
+                  height="44px"
+                  width="44px"
+                  src={user.avatar}
+                  alt=""
+                />
+                <div>
+                  <h3>{user.username}</h3>
+                  <span>{user.name}</span>
+                </div>
+              </StyledSuggestionUser>
+              <FollowButtonContainer
+                userId={user.id}
+                callback={handleSelectedFollowers}
+              />
+            </StyledSuggestion>
+          ))}
+
+          {/* <SuggestionsList
+            dispatch={feed}
             suggestions={feedState.suggestions}
             FollowButton={FollowButtonContainer}
-          />
+          /> */}
 
-          <button onClick={forceUpdate}>Get Started</button>
+          {hasSelectedFollowers && (
+            <button onClick={() => feedDispatch(feedActions.setFeedLoading())}>
+              Get Started
+            </button>
+          )}
         </StyledCard>
       </>
     );

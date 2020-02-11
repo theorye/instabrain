@@ -6,7 +6,6 @@ import AuthContainer from "../../containers/AuthContainer";
 import FeedContainer from "../../containers/FeedContainer";
 import ProfileContainer from "../../containers/ProfileContainer";
 import StyledPage from "../styles/StyledPage";
-import FeedProvider from "../../providers/FeedProvider";
 
 const HomeRoutes = () => {
   console.log("Home Routes...");
@@ -23,11 +22,9 @@ const HomeRoutes = () => {
   }
 
   return state.isAuthenticated ? (
-    <FeedProvider>
       <StyledPage topNav>
         <FeedContainer />
       </StyledPage>
-    </FeedProvider>
   ) : (
     <StyledHomePage>
       <img className="phones" src="/assets/phones.png" alt="phones"></img>

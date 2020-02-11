@@ -5,18 +5,21 @@ import { AppContext, reducer, initialState } from "./contexts/AppContext";
 import Routes from "./features/routing/Routes";
 import GlobalStyle from "./features/styles/GlobalStyle";
 import useLocalStorage from "./hooks/useLocalStorage";
+import FeedProvider from "./providers/FeedProvider";
 
 function AppContainer({ state }) {
   console.log("App container rendered ...");
   console.log(state);
   return (
-    <AppContext.Provider
-      value={useReducer(reducer, { ...initialState, ...state })}
-    >
-      <BrowserRouter>
-        <Routes />
-      </BrowserRouter>
-    </AppContext.Provider>
+    <BrowserRouter>
+      <AppContext.Provider
+        value={useReducer(reducer, { ...initialState, ...state })}
+      >
+        <FeedProvider>
+          <Routes />
+        </FeedProvider>
+      </AppContext.Provider>
+    </BrowserRouter>
   );
 }
 
@@ -39,7 +42,6 @@ export const App = () => {
         })
         .catch(() => {})
         .finally(() => {
-          console.log("hey man");
           setIsLoading(false);
         });
     } else {

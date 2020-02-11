@@ -13,12 +13,14 @@ const followUser = require("./controllers/followUser");
 const getPosts = require("./controllers/getPosts");
 const getPost = require("./controllers/getPost");
 const getFeed = require("./controllers/getFeed");
+const unfollowUser = require("./controllers/unfollowUser");
 
 // App Middleware
 const loggerMiddleware = require("./middleware/logger");
 
 // Route Middleware
 const authenticateToken = require("./middleware/authenticateToken");
+const extractUserFromToken = require("./middleware/extractUserFromToken");
 
 // Validation Middleware
 // const validate = require("./middleware/validate");
@@ -41,11 +43,12 @@ app.use(loggerMiddleware);
 app.post("/api/accounts/login", loginUser);
 app.post("/api/accounts/register", createUser);
 app.post("/api/accounts/follow", authenticateToken, followUser);
+app.delete("/api/accounts/follow/:followee", authenticateToken, unfollowUser);
 app.get("/api/posts", authenticateToken, getPosts);
 app.post("/api/token", refreshToken);
 app.get("/api/user", authenticateToken, getUser);
 app.get("/api/users", getUsers);
-app.get("/api/profiles", getProfile);
+app.get("/api/profiles", extractUserFromToken, getProfile);
 app.get("/api/post", getPost);
 
 app.get("/api/feed", authenticateToken, getFeed);

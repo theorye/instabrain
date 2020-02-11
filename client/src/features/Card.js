@@ -5,6 +5,7 @@ import EllipsesSVG from "./shared/EllipsesSVG";
 import StyledCard from "./styles/StyledCard";
 import StyledUserImg from "./styles/StyledUserImg";
 import HeartSVG from "./shared/HeartSVG";
+import { Link } from "react-router-dom";
 
 const StyledCardHeader = styled.header`
   display: flex;
@@ -46,20 +47,22 @@ const Card = ({ username, avatar, url, ...props }) => {
   return (
     <StyledCard>
       <StyledCardHeader>
-        <div
-          style={{ cursor: "pointer", display: "flex", alignItems: "center" }}
-        >
-          <StyledUserImg src={avatar} alt="" />
-          <h3
-            style={{
-              cursor: "pointer",
-              marginLeft: ".8rem",
-              // fontWeight: "bold"
-            }}
+        <Link to={`/${username}`}>
+          <div
+            style={{ cursor: "pointer", display: "flex", alignItems: "center" }}
           >
-            {username}
-          </h3>
-        </div>
+            <StyledUserImg src={avatar} alt="" />
+            <h3
+              style={{
+                cursor: "pointer",
+                marginLeft: ".8rem"
+                // fontWeight: "bold"
+              }}
+            >
+              {username}
+            </h3>
+          </div>
+        </Link>
 
         <EllipsesSVG style={{ cursor: "pointer" }} />
       </StyledCardHeader>
@@ -69,12 +72,12 @@ const Card = ({ username, avatar, url, ...props }) => {
       <StyledSecondaryContent>
         <StyledContentCtrls>
           <HeartSVG style={{ cursor: "pointer" }} />
-          <CommentSVG style={{ cursor: "pointer" }}/>
+          <CommentSVG style={{ cursor: "pointer" }} />
         </StyledContentCtrls>
 
         <span style={{ fontWeight: "bold" }}>187 likes</span>
         <div>
-          <h3 style={{ margin: 0, display: 'inline-block' }}>{username}</h3>
+          <h3 style={{ margin: 0, display: "inline-block" }}>{username}</h3>
           <span style={{ marginLeft: ".5rem" }}>
             Happy Birthday to my Dear Friend, I am so lucky to of met you and
             for you to be in my life. We’ve been friends for a decade and have

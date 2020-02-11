@@ -30,6 +30,7 @@ module.exports = async function loginUser(req, res) {
         username: user.username,
         id: user.id,
         following: user.following,
+        name: user.name,
         ...generateTokens(user)
       });
     } else {

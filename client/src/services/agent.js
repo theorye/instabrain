@@ -47,6 +47,8 @@ export const InstabrainApi = {
   getPosts: () => requests.get(`/api/posts`),
   getPost: id => requests.get(`/api/post?id=${id}`),
 
+  unfollow: followee =>
+    requests.del(`/api/accounts/follow/${followee}`),
   getFeed: (suggestionsLimit = 4, postsLimit = 4) =>
     requests.get(`/api/feed?pLimit=${postsLimit}&sLimit=${suggestionsLimit}`)
 };

@@ -1,14 +1,18 @@
 const useMysqlDb = require("../services/mysql");
-const followQuery = require("../queries/followQuery");
+const unfollowQuery = require("../queries/unfollowQuery");
 
-module.exports = async function followUser(req, res) {
+module.exports = async function unFollowUser(req, res) {
   const { query } = useMysqlDb();
 
   try {
-    const { followee } = req.body;
+    const { followee } = req.params;
+    
     const { id: follower } = req.user;
+    console.log(req.params);
+    console.log(followee);
+ 
 
-    const response = await query(followQuery(follower, followee));
+    const response = await query(unfollowQuery(follower, followee));
 
     if (response.length[0] === 0) {
       return res.status(400).send("Cannot finish following");
