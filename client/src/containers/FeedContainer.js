@@ -22,6 +22,14 @@ const StyledSuggestion = styled.div`
   padding: 0.5rem 0.5rem;
 `;
 
+const StyledFeedSuggestion = styled.div`
+  display: flex;
+  align-items: center;
+  width: 20rem;
+  justify-content: space-between;
+  padding: 0.5rem 0.5rem;
+`;
+
 const StyledSuggestionUser = styled.div`
   display: flex;
   align-items: center;
@@ -65,7 +73,7 @@ const FeedContainer = () => {
             height: "25vh"
           }}
         >
-          <div style={{ display: "flex" }}>
+          <div style={{ display: "flex", marginBottom: "2rem" }}>
             <StyledUserImg
               height={"50px"}
               src="/assets/defaultUser.jpg"
@@ -87,11 +95,26 @@ const FeedContainer = () => {
 
           <StyledCard>
             <h4>Suggestions for you</h4>
-            {/* <SuggestionsList
-              setFeedLoding={}
-              incrementFollowing={incrementFollowing}
-              FollowButton={FollowButtonContainer}
-            /> */}
+            {feedState.suggestions.slice(0, 4).map(user => (
+              <StyledFeedSuggestion key={user.id}>
+                <StyledSuggestionUser>
+                  <StyledUserImg
+                    height="44px"
+                    width="44px"
+                    src={user.avatar}
+                    alt=""
+                  />
+                  <div>
+                    <h3>{user.username}</h3>
+                  </div>
+                 
+                </StyledSuggestionUser>
+                <FollowButtonContainer
+                  userId={user.id}
+                  callback={handleSelectedFollowers}
+                />
+              </StyledFeedSuggestion>
+            ))}
           </StyledCard>
         </div>
       </div>

@@ -9,6 +9,7 @@ const StyledProfileGallery = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  margin-right: auto;
 `;
 
 export const ProfileGallery = ({ pictures }) => {
